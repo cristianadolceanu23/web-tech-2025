@@ -1,0 +1,42 @@
+/* implementează folosind float în CSS o machetă de 3 x 3 celule ca pentru jocul x si 0 ca în imaginea de mai jos (stânga) pornind de la structura HTML din dreapta*/
+
+/* stilizez containerul principal */
+.container {
+  width: 300px;
+  margin: 50px auto;
+  /* folosesc overflow hidden pentru a repara problema cu elementele float */
+  overflow: hidden;
+  /* adaug o bordura exterioara optionala daca vreau sa delimitez tot jocul, 
+       dar pentru x si 0 clasic de obicei nu se pune bordura la container */
+}
+
+/* stilizez fiecare celula */
+.celula {
+  width: 100px;
+  height: 100px;
+  /* folosesc float pentru a le pune una langa alta */
+  float: left;
+
+  /* adaug borduri in dreapta si jos pentru a crea grila */
+  border-right: 2px solid black;
+  border-bottom: 2px solid black;
+
+  /* stilizez textul din interior (x sau 0) */
+  font-size: 60px;
+  text-align: center;
+  line-height: 100px;
+  font-family: sans-serif;
+
+  /* ma asigur ca bordura nu strica dimensiunile (box model) */
+  box-sizing: border-box;
+}
+
+/* selectez fiecare a 3-a celula (3, 6, 9) pentru a scoate bordura din dreapta */
+.celula:nth-child(3n) {
+  border-right: none;
+}
+
+/* selectez ultimele 3 celule (7, 8, 9) pentru a scoate bordura de jos */
+.celula:nth-child(n + 7) {
+  border-bottom: none;
+}
