@@ -1,0 +1,102 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Agenda Telefonica</title>
+    <style>
+      /* Putin stil pentru a face tabelul sa arate bine */
+      table {
+        border-collapse: collapse;
+        width: 50%;
+        margin-bottom: 20px;
+      }
+      th,
+      td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+      }
+      th {
+        background-color: #f2f2f2;
+      }
+      input {
+        padding: 5px;
+        margin-right: 10px;
+      }
+    </style>
+
+    <script>
+      window.onload = () => {
+        const form = document.getElementById("agendaForm");
+
+        // Aceasta este functia care se executa cand apesi "Adauga"
+        const adaugaContact = (e) => {
+          // 1. Oprim reincarcarea paginii
+          e.preventDefault();
+
+          // 2. Preluam tabelul (mai exact corpul tabelului - tbody)
+          const tableBody = document.getElementById("listaContacte");
+
+          // 3. Preluam valorile din cele doua casute
+          const nume = document.getElementById("numeInput").value;
+          const telefon = document.getElementById("telefonInput").value;
+
+          // Validare simpla: Nu adaugam daca e gol
+          if (nume === "" || telefon === "") {
+            alert("Te rog completeaza ambele campuri!");
+            return;
+          }
+
+          // 4. Cream elementele HTML necesare pentru un rand nou
+          const randNou = document.createElement("tr"); // Randul (Table Row)
+          const celulaNume = document.createElement("td"); // Celula 1 (Table Data)
+          const celulaTelefon = document.createElement("td"); // Celula 2
+
+          // 5. Punem textul in celule
+          celulaNume.innerText = nume;
+          celulaTelefon.innerText = telefon;
+
+          // 6. Asamblam randul (punem celulele in rand)
+          randNou.appendChild(celulaNume);
+          randNou.appendChild(celulaTelefon);
+
+          // 7. Punem randul complet in tabel
+          tableBody.appendChild(randNou);
+
+          // 8. Golim casutele de text pentru urmatoarea introducere
+          document.getElementById("numeInput").value = "";
+          document.getElementById("telefonInput").value = "";
+        };
+
+        // Atasam functia la formular
+        form.onsubmit = adaugaContact;
+      };
+    </script>
+  </head>
+
+  <body>
+    <h1>Agenda Mea</h1>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Nume</th>
+          <th>Telefon</th>
+        </tr>
+      </thead>
+      <tbody id="listaContacte"></tbody>
+    </table>
+
+    <hr />
+
+    <h3>Adaugă contact nou</h3>
+    <form id="agendaForm">
+      <label>Nume:</label>
+      <input type="text" id="numeInput" placeholder="Ex: Popescu Ion" />
+
+      <label>Telefon:</label>
+      <input type="text" id="telefonInput" placeholder="Ex: 0722..." />
+
+      <button type="submit">Adaugă</button>
+    </form>
+  </body>
+</html>
