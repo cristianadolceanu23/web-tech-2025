@@ -1,0 +1,66 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Evenimente Custom</title>
+    <script>
+      window.onload = () => {
+        // 1. Aleg elementul din DOM (un camp de text)
+        const inputElement = document.getElementById("myInput");
+        const statusMessage = document.getElementById("status");
+
+        // 2. Definesc functia care va trata evenimentul meu CUSTOM ('valideazaLungime')
+        // Aceasta functie primeste datele prin 'e.detail'
+        const tratareEvenimentCustom = (e) => {
+          console.log("Am prins evenimentul custom! Date:", e.detail);
+
+          // Verific datele primite si actualizez interfata
+          if (e.detail.esteValid) {
+            statusMessage.style.color = "green";
+            statusMessage.innerText = `Perfect! Lungime: ${e.detail.lungime}`;
+          } else {
+            statusMessage.style.color = "red";
+            statusMessage.innerText = `Prea scurt... (Doar ${e.detail.lungime} caractere)`;
+          }
+        };
+
+        // 3. Atasez ascultatorul pentru evenimentul custom pe elementul input
+        inputElement.addEventListener(
+          "valideazaLungime",
+          tratareEvenimentCustom
+        );
+
+        // 4. Tratez evenimentul STANDARD 'input' (cand utilizatorul tasteaza)
+        inputElement.addEventListener("input", (e) => {
+          // Iau textul actual din casuta
+          const textTastat = e.target.value;
+
+          // Creez evenimentul custom
+          // In proprietatea 'detail' pun logica mea (valid daca are peste 5 caractere)
+          const myCustomEvent = new CustomEvent("valideazaLungime", {
+            detail: {
+              lungime: textTastat.length,
+              esteValid: textTastat.length >= 5,
+            },
+          });
+
+          // TRIMIT (dispatch) evenimentul custom imediat
+          // Asta va declansa functia 'tratareEvenimentCustom' de mai sus
+          inputElement.dispatchEvent(myCustomEvent);
+        });
+      };
+    </script>
+  </head>
+
+  <body style="font-family: sans-serif; padding: 20px">
+    <h3>Scrie un nume (minim 5 litere):</h3>
+
+    <input
+      type="text"
+      id="myInput"
+      placeholder="Scrie aici..."
+      style="padding: 10px; font-size: 16px"
+    />
+
+    <p id="status" style="font-weight: bold; color: gray">Astept sa scrii...</p>
+  </body>
+</html>
