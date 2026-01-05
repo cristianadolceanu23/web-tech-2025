@@ -1,0 +1,29 @@
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  /* fac ca elementele listei sa fie afisate pe orizontala */
+  display: flex;
+}
+
+a:link,
+a:visited {
+  /* folosesc flexbox pentru a centra textul perfect in interiorul link-ului */
+  display: flex;
+  justify-content: center; /* centrare orizontala */
+  align-items: center; /* centrare verticala */
+
+  font-weight: bold;
+  font-size: 17px;
+  color: #fff;
+  background-color: black; /* culoarea de fundal ceruta */
+  width: 200px;
+  height: 50px; /* o inaltime fixa pentru a face butoanele mai vizibile */
+  text-decoration: none;
+  margin-right: 10px; /* spatiu intre butoane */
+}
+
+a:hover,
+a:active {
+  background-color: grey; /* culoarea de fundal la hover ceruta */
+}

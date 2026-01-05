@@ -1,0 +1,41 @@
+/*Construiți un formular ca în imaginea de mai jos*/
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* stilizez toate input-urile de text, select-ul si textarea */
+input[type="text"],
+select,
+textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box; /* ma asigur ca padding-ul nu mareste elementul peste 100% */
+  margin-top: 6px;
+  margin-bottom: 16px;
+  resize: vertical; /* permit utilizatorului sa traga de colt doar pe verticala */
+}
+
+/* stilizez butonul de submit */
+input[type="submit"] {
+  background-color: #04aa6d; /* culoarea verde din imagine */
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* schimb culoarea butonului cand pun mouse-ul pe el */
+input[type="submit"]:hover {
+  background-color: #45a049;
+}
+
+/* stilizez containerul principal gri */
+.container {
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+}
