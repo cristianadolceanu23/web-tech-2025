@@ -1,0 +1,271 @@
+index.html <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>thatsapp</title>
+    <style>
+      :root {
+        --base-background-color: white;
+        --secondary-background-color: whitesmoke;
+        --base-text-color: black;
+        --secondary-text-color: gray;
+        --badge-color: lime; /* Verdele aprins din imagine */
+        --header-height: 60px;
+      }
+
+      body {
+        margin: 0px;
+        font-family: Arial, sans-serif;
+        overflow: hidden; /* Ascundem scrollbar-ul paginii */
+      }
+
+      .container {
+        display: grid;
+        height: 100vh;
+        width: 100vw;
+
+        /* Definim coloanele: 30% stanga, restul dreapta */
+        grid-template-columns: 30% 1fr;
+
+        /* Definim randurile: Header, Continut, Footer */
+        /* Ajustam procentele pentru a se potrivi mai bine cu imaginea */
+        grid-template-rows: var(--header-height) 1fr 60px;
+
+        /* Harta layout-ului - Contactele se intind pe 2 randuri in stanga */
+        grid-template-areas:
+          "search-bar chat-heading"
+          "contacts chat"
+          "contacts chat-input";
+      }
+
+      /* --- ZONE GRID --- */
+
+      div.search-bar {
+        grid-area: search-bar;
+        background-color: var(--base-background-color);
+        border-right: 1px solid #ccc;
+        border-bottom: 1px solid #f0f0f0;
+        display: flex;
+        align-items: center;
+        padding: 10px;
+      }
+
+      div.chat-heading {
+        grid-area: chat-heading;
+        background-color: var(--secondary-background-color);
+        display: flex;
+        align-items: center;
+        padding-left: 20px;
+        font-weight: bold;
+      }
+
+      div.contacts {
+        grid-area: contacts;
+        background-color: var(--base-background-color);
+        border-right: 1px solid #ccc;
+        overflow-y: auto;
+      }
+
+      div.chat {
+        grid-area: chat;
+        background-color: var(--base-background-color); /* Alb in imaginea ta */
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        overflow-y: auto;
+      }
+
+      div.chat-input {
+        grid-area: chat-input;
+        background-color: var(--base-background-color);
+        border-top: 1px solid #eee;
+        display: flex;
+        align-items: center;
+        padding: 10px 20px;
+      }
+
+      /* --- STILIZARE ELEMENTE --- */
+
+      /* Input Search */
+      div.search-bar input {
+        height: 35px;
+        width: 100%;
+        border: 1px solid #ccc;
+        padding-left: 10px;
+      }
+
+      /* Input Mesaj */
+      div.chat-input input[type="text"] {
+        flex: 1;
+        height: 35px;
+        border: 1px solid #ccc;
+        padding-left: 10px;
+        margin-right: 10px;
+      }
+
+      div.chat-input input[type="button"] {
+        width: 35px;
+        height: 35px;
+        border: 1px solid #ccc;
+        background-color: #eee;
+        cursor: pointer;
+      }
+
+      /* Contact Items */
+      .contact {
+        height: 80px;
+        display: flex;
+        align-items: center;
+        padding: 0 15px;
+        cursor: pointer;
+      }
+
+      .contact:hover {
+        background-color: var(--secondary-background-color);
+      }
+
+      /* Highlight la un contact (ca in imagine) */
+      .contact:nth-child(2) {
+        background-color: var(--secondary-background-color);
+      }
+
+      .avatar {
+        height: 50px;
+        width: 50px;
+        border-radius: 50%;
+        background-color: var(--badge-color); /* Verde */
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 15px;
+        font-weight: bold;
+      }
+
+      .contact-container {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .name {
+        font-weight: bold;
+        margin-bottom: 5px;
+      }
+
+      .status {
+        font-size: 0.9em;
+        color: var(--secondary-text-color);
+      }
+
+      /* --- MESAJELE --- */
+      .message {
+        max-width: 60%;
+        padding: 15px;
+        border-radius: 4px;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .message .content {
+        margin-bottom: 5px;
+      }
+
+      .message .time {
+        font-size: 0.8em;
+        color: var(--secondary-text-color);
+      }
+
+      /* Mesajele de pe STANGA (Albe) */
+      .message.left {
+        background-color: var(--secondary-background-color);
+        align-self: flex-start;
+      }
+
+      /* Mesajele de pe DREAPTA (Verzi) */
+      .message.right {
+        background-color: var(--badge-color); /* Verdele aprins */
+        align-self: flex-end;
+        text-align: left; /* Textul ramane aliniat la stanga in bula */
+      }
+
+      /* Ajustare culoare timestamp pe fundal verde */
+      .message.right .time {
+        color: #333;
+      }
+
+      .interlocutor {
+        margin-left: 15px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="search-bar">
+        <input type="text" placeholder="Search or start chat" id="search" />
+      </div>
+
+      <div class="contacts">
+        <div class="contact">
+          <div class="avatar">J</div>
+          <div class="contact-container">
+            <div class="name">Jim</div>
+            <div class="status">Here</div>
+          </div>
+        </div>
+        <div class="contact">
+          <div class="avatar">J</div>
+          <div class="contact-container">
+            <div class="name">Jane</div>
+            <div class="status">Here</div>
+          </div>
+        </div>
+        <div class="contact">
+          <div class="avatar">J</div>
+          <div class="contact-container">
+            <div class="name">John</div>
+            <div class="status">Here</div>
+          </div>
+        </div>
+        <div class="contact">
+          <div class="avatar">B</div>
+          <div class="contact-container">
+            <div class="name">Batman</div>
+            <div class="status">Here</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="chat-heading">
+        <div class="avatar" style="height: 40px; width: 40px">J</div>
+        <div class="interlocutor">Jim</div>
+      </div>
+
+      <div class="chat">
+        <div class="message left">
+          <div class="content">Message from me</div>
+          <div class="time">10-10-10</div>
+        </div>
+
+        <div class="message right">
+          <div class="content">Message from Jim</div>
+          <div class="time">10-10-10</div>
+        </div>
+
+        <div class="message left">
+          <div class="content">Message from me</div>
+          <div class="time">10-10-10</div>
+        </div>
+      </div>
+
+      <div class="chat-input">
+        <input type="text" placeholder="input message here" />
+        <input type="button" value=">" />
+      </div>
+    </div>
+  </body>
+</html>

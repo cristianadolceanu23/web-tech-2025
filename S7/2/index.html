@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Reflow Flex Solution</title>
+    <style>
+      /* Aici incepe CSS-ul */
+      * {
+        margin: 0px;
+        padding: 0px;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: sans-serif;
+        font-size: 45px;
+        padding: 32px;
+        background-color: #f0f0f0; /* Optional: am pus un fundal deschis */
+      }
+
+      .container {
+        display: flex; /* Activam Flexbox */
+        flex-wrap: wrap; /* CRITIC: Asta permite elementelor sa treaca pe randul nou */
+        justify-content: center; /* Le centram pe pagina */
+        gap: 16px; /* Spatiu intre elemente */
+      }
+
+      /* Am sters clasa .block pentru ca nu mai avem nevoie de ea */
+
+      .box {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: white; /* Optional: ca sa se vada mai bine */
+        border: 3px solid black;
+        border-radius: 8px;
+        width: 300px; /* Latime fixa */
+        height: 150px; /* Am adaugat si inaltime ca sa arate a cutii */
+        margin: 10px; /* Putin spatiu extra */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="box">A</div>
+      <div class="box">B</div>
+      <div class="box">C</div>
+      <div class="box">D</div>
+      <div class="box">E</div>
+      <div class="box">F</div>
+      <div class="box">G</div>
+      <div class="box">H</div>
+      <div class="box">I</div>
+    </div>
+  </body>
+</html>

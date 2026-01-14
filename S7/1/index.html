@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ro">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Seminar 3 TW - Flexbox Layout</title>
+    <style>
+      /* Reset simplu pe care l-am adaugat */
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+      }
+
+      body {
+        background-color: #1a1a1a; /* Dark theme ca in imagine */
+        color: white;
+        padding: 2rem;
+      }
+
+      /* --- CERINTA 1: Create a 3 column layout using Flex --- */
+      .container {
+        display: flex; /* Am activat Flexbox */
+        gap: 20px; /* Am pus spatiu intre coloane */
+        justify-content: space-between; /* Am distribuit coloanele */
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .column {
+        flex: 1; /* Am setat ca toate cele 3 coloane sa aiba latime egala */
+        background-color: #2d2d2d;
+        padding: 20px;
+        border-radius: 8px;
+
+        /* --- CERINTA 2: Align the column items vertically in each column --- */
+        display: flex; /* Am facut si coloana un container flex */
+        flex-direction: column; /* Am asezat elementele unul sub altul (vertical) */
+        align-items: stretch; /* Am intins elementele pe toata latimea coloanei */
+        gap: 15px; /* Am pus spatiu intre itemi pe verticala */
+      }
+
+      h2 {
+        text-align: center;
+        margin-bottom: 10px;
+        color: #61dafb;
+      }
+
+      /* --- CERINTA 3: Add a bit of styling over the column items --- */
+      .item {
+        background-color: #404040;
+        padding: 15px;
+        border-radius: 5px;
+        border: 1px solid #555;
+        text-align: center;
+        transition: all 0.3s ease; /* Am pus tranzitie fina pentru hover */
+        cursor: pointer;
+      }
+
+      /* --- CERINTA 4: Add a preferred style on the hover state --- */
+      .item:hover {
+        background-color: #61dafb; /* Schimb culoarea de fundal la hover */
+        color: #000; /* Schimb culoarea textului */
+        transform: translateY(-5px); /* Efect de ridicare pe care l-am ales */
+        box-shadow: 0 5px 15px rgba(97, 218, 251, 0.3); /* Am adaugat umbra */
+        border-color: #61dafb;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 style="text-align: center; margin-bottom: 30px">
+      To Do - Flexbox Demo
+    </h1>
+
+    <div class="container">
+      <div class="column">
+        <h2>Coloana 1</h2>
+        <div class="item">Item 1.1</div>
+        <div class="item">Item 1.2</div>
+        <div class="item">Item 1.3</div>
+      </div>
+
+      <div class="column">
+        <h2>Coloana 2</h2>
+        <div class="item">Item 2.1</div>
+        <div class="item">Item 2.2</div>
+        <div class="item">Item 2.3</div>
+        <div class="item">Item 2.4</div>
+      </div>
+
+      <div class="column">
+        <h2>Coloana 3</h2>
+        <div class="item">Item 3.1</div>
+        <div class="item">Item 3.2</div>
+      </div>
+    </div>
+  </body>
+</html>
