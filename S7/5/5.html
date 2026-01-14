@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>thatsapp</title>
+    <style>
+      /* Definirea variabilelor pentru culori (Theme) */
+      :root {
+        --base-background-color: white;
+        --secondary-background-color: whitesmoke;
+        --chat-background: #efe7dd; /* Culoare specifica WhatsApp */
+        --base-text-color: black;
+        --secondary-text-color: gray;
+        --badge-color: lime;
+        --header-height: 60px;
+      }
+
+      body {
+        margin: 0px;
+        font-family: Arial, sans-serif;
+      }
+
+      /* --- LAYOUT PRINCIPAL (GRID) --- */
+      .container {
+        display: grid;
+        height: 100vh;
+        width: 100vw;
+
+        /* 2 Coloane: 30% stanga, restul dreapta */
+        grid-template-columns: 30% 1fr;
+
+        /* 3 Randuri: Header, Continut, Footer */
+        grid-template-rows: var(--header-height) 1fr var(--header-height);
+
+        /* Harta interfetei */
+        grid-template-areas:
+          "search-bar chat-heading"
+          "contacts chat"
+          "contacts chat-input";
+      }
+
+      /* --- STILIZARE ZONE GRID --- */
+
+      /* 1. Bara de cautare (Stanga Sus) */
+      div.search-bar {
+        grid-area: search-bar;
+        background-color: var(--secondary-background-color);
+        border-right: 1px solid #ccc;
+        border-bottom: 1px solid #ccc;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 10px;
+      }
+
+      div.search-bar input {
+        height: 35px;
+        width: 90%;
+        border: 1px solid #ddd;
+        border-radius: 20px;
+        padding-left: 15px;
+        outline: none;
+      }
+
+      /* 2. Lista Contacte (Stanga Jos - se intinde pe 2 randuri) */
+      div.contacts {
+        grid-area: contacts;
+        background-color: var(--base-background-color);
+        border-right: 1px solid #ccc;
+        overflow-y: auto; /* Scroll doar aici */
+      }
+
+      /* 3. Header Chat (Dreapta Sus) */
+      div.chat-heading {
+        grid-area: chat-heading;
+        background-color: var(--secondary-background-color);
+        border-bottom: 1px solid #ccc;
+        display: flex;
+        align-items: center;
+        padding-left: 20px;
+        font-weight: bold;
+      }
+
+      /* 4. Zona Mesaje (Dreapta Mijloc) */
+      div.chat {
+        grid-area: chat;
+        background-color: var(--chat-background);
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        overflow-y: auto;
+      }
+
+      /* 5. Input Mesaj (Dreapta Jos) */
+      div.chat-input {
+        grid-area: chat-input;
+        background-color: var(--secondary-background-color);
+        border-top: 1px solid #ccc;
+        display: flex;
+        align-items: center;
+        padding: 10px 20px;
+        gap: 10px;
+      }
+
+      div.chat-input input[type="text"] {
+        flex: 1;
+        height: 40px;
+        border-radius: 20px;
+        border: 1px solid #ccc;
+        padding-left: 15px;
+        outline: none;
+      }
+
+      div.chat-input input[type="button"] {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        border: none;
+        background-color: #ddd;
+        cursor: pointer;
+        font-weight: bold;
+      }
+
+      /* --- STILIZARE ELEMENTE INDIVIDUALE --- */
+
+      .contact {
+        height: 70px;
+        display: flex;
+        align-items: center;
+        padding: 0 15px;
+        border-bottom: 1px solid #f0f0f0;
+        cursor: pointer;
+        transition: background 0.2s;
+      }
+
+      .contact:hover {
+        background-color: #f5f5f5;
+      }
+
+      .avatar {
+        width: 45px;
+        height: 45px;
+        background-color: #ccc; /* Gri generic */
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-right: 15px;
+        color: white;
+        font-weight: bold;
+      }
+
+      .contact-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      .name {
+        font-weight: bold;
+        font-size: 16px;
+        margin-bottom: 4px;
+      }
+
+      .status {
+        font-size: 13px;
+        color: var(--secondary-text-color);
+      }
+
+      .interlocutor {
+        margin-left: 15px;
+        font-size: 18px;
+      }
+
+      /* Mesajele */
+      .message {
+        max-width: 60%;
+        padding: 10px;
+        border-radius: 8px;
+        box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+        position: relative;
+        background-color: white; /* Mesaj primit (Jim) */
+        align-self: flex-start; /* Aliniat la stanga */
+      }
+
+      /* Mesajele mele (clasa ajutatoare) */
+      .message.me {
+        background-color: #dcf8c6; /* Verde deschis */
+        align-self: flex-end; /* Aliniat la dreapta */
+      }
+
+      .message .time {
+        font-size: 11px;
+        color: gray;
+        text-align: right;
+        margin-top: 5px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="search-bar">
+        <input type="text" placeholder="Search or start chat" id="search" />
+      </div>
+
+      <div class="contacts">
+        <div class="contact">
+          <div class="avatar">J</div>
+          <div class="contact-container">
+            <div class="name">Jim</div>
+            <div class="status">Here</div>
+          </div>
+        </div>
+        <div class="contact">
+          <div class="avatar">J</div>
+          <div class="contact-container">
+            <div class="name">Jane</div>
+            <div class="status">Here</div>
+          </div>
+        </div>
+        <div class="contact">
+          <div class="avatar">J</div>
+          <div class="contact-container">
+            <div class="name">John</div>
+            <div class="status">Here</div>
+          </div>
+        </div>
+        <div class="contact">
+          <div class="avatar">B</div>
+          <div class="contact-container">
+            <div class="name">Batman</div>
+            <div class="status">Here</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="chat-heading">
+        <div class="avatar">J</div>
+        <div class="interlocutor">Jim</div>
+      </div>
+
+      <div class="chat">
+        <div class="message">
+          <div class="content">Message from Jim</div>
+          <div class="time">10-10-10</div>
+        </div>
+
+        <div class="message me">
+          <div class="content">Message from me</div>
+          <div class="time">10-10-10</div>
+        </div>
+
+        <div class="message">
+          <div class="content">Message from Jim</div>
+          <div class="time">10-10-10</div>
+        </div>
+
+        <div class="message me">
+          <div class="content">Message from me</div>
+          <div class="time">10-10-10</div>
+        </div>
+      </div>
+
+      <div class="chat-input">
+        <input type="text" placeholder="input message here" />
+        <input type="button" value=">" />
+      </div>
+    </div>
+  </body>
+</html>
